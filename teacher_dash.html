@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructor Portal | EduSpace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary: #1b4332;
+            --accent: #52b788;
+            --bg: #f8fafc;
+            --white: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            display: flex;
+            height: 100vh;
+            color: var(--text-main);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: var(--primary);
+            color: white;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+        }
+
+            .sidebar h2 {
+                color: var(--accent);
+                text-align: center;
+                margin-bottom: 40px;
+                font-size: 24px;
+                font-weight: 700;
+            }
+
+        .nav-item {
+            padding: 14px 18px;
+            cursor: pointer;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.7);
+        }
+
+            .nav-item i {
+                width: 20px;
+                text-align: center;
+            }
+
+            .nav-item:hover, .nav-item.active {
+                background: var(--accent);
+                color: white;
+            }
+
+        /* Main Content */
+        .main {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+            .section.active {
+                display: block;
+            }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Profile Image Setup */
+        .profile-card {
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .image-wrapper {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 5px solid var(--accent);
+            object-fit: cover;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Cards and Elements */
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            border: 1px solid #f1f5f9;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            box-sizing: border-box;
+            background: #fcfcfd;
+            font-family: inherit;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+            .btn:hover {
+                background: #2d5a44;
+                transform: translateY(-2px);
+            }
+
+        .student-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8fafc;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            border: 1px solid #edf2f7;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>EduSpace Hub</h2>
+        <div class="nav-item active" onclick="switchSection('t-profile', this)"><i class="fas fa-id-badge"></i> Profile</div>
+        <div class="nav-item" onclick="switchSection('t-courses', this)"><i class="fas fa-layer-group"></i> Manage Courses</div>
+        <div class="nav-item" onclick="switchSection('t-exams', this)"><i class="fas fa-pen-nib"></i> Exam Builder</div>
+        <div class="nav-item" onclick="switchSection('t-grades', this)"><i class="fas fa-chart-line"></i> Grading</div>
+        <div class="nav-item" onclick="switchSection('t-subscribers', this)"><i class="fas fa-user-graduate"></i> My Students</div>
+    </div>
+
+    <div class="main">
+        <section id="t-profile" class="section active">
+            <div class="card profile-card">
+                <div class="image-wrapper">
+                    <img id="t-photo" class="profile-img" src="https://ui-avatars.com/api/?name=Teacher&background=1b4332&color=fff">
+                    <input type="file" id="t-upload" hidden onchange="updatePhoto(this)">
+                </div>
+                <button class="btn" style="width: auto; background: var(--accent);" onclick="document.getElementById('t-upload').click()">Change Photo</button>
+                <h2 id="t-display-name">Instructor Name</h2>
+                <input type="text" id="t-spec" placeholder="Specialization (e.g. Mathematics Expert)">
+                <button class="btn" onclick="registerInstructor()">Sync & Publish Profile</button>
+            </div>
+        </section>
+
+        <section id="t-courses" class="section">
+            <div class="card">
+                <h2>Publish New Content</h2>
+                <input type="text" id="c-name" placeholder="Lesson Title">
+                <textarea id="c-info" placeholder="Brief Summary of the lesson" rows="3"></textarea>
+                <input type="url" id="c-link-pdf" placeholder="PDF Drive Link">
+                <input type="url" id="c-link-vid" placeholder="Video Link (YouTube)">
+                <button class="btn" onclick="saveCourse()">Publish Now</button>
+            </div>
+        </section>
+
+        <section id="t-exams" class="section">
+            <div class="card">
+                <h2>Create Assignment</h2>
+                <input type="text" id="e-name" placeholder="Exam Name">
+                <input type="url" id="e-url" placeholder="Google Forms / Quiz Link">
+                <button  class="btn" onclick="saveExam()">Send to Students</button>
+            </div>
+        </section>
+
+        <section id="t-grades" class="section">
+            <div class="card">
+                <h2>Grading Portal</h2>
+                <input type="text" id="g-st-name" placeholder="Student Full Name">
+                <input type="text" id="g-val" placeholder="Score (e.g. 100/100)">
+                <textarea id="g-note" placeholder="Feedback/Comments"></textarea>
+                <button class="btn" onclick="saveGrade()">Submit Grade</button>
+            </div>
+        </section>
+
+        <section id="t-subscribers" class="section">
+            <div class="card">
+                <h2>Enrolled Students</h2>
+                <p style="color: var(--text-muted); font-size: 14px;">Students who enrolled in your classes appear here in real-time.</p>
+                <div id="student-list-box">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Switch between Dashboard sections
+        function switchSection(id, element) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            element.classList.add('active');
+
+            if(id === 't-subscribers') fetchEnrolledStudents();
+        }
+
+        // Profile Photo Logic
+        function updatePhoto(input) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('t-photo').src = e.target.result;
+                localStorage.setItem('t-img', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        // Save Instructor Info to Marketplace
+        function registerInstructor() {
+            const name = localStorage.getItem('userName') || "Instructor";
+            const spec = document.getElementById('t-spec').value;
+            const img = document.getElementById('t-photo').src;
+
+            let market = JSON.parse(localStorage.getItem('teacherMarket')) || [];
+            market = market.filter(t => t.name !== name);
+            market.push({ name, spec, img, id: Date.now() });
+
+            localStorage.setItem('teacherMarket', JSON.stringify(market));
+            alert("Your profile is now visible on the Student Platform!");
+        }
+
+        // Course Management
+        function saveCourse() {
+            const courses = JSON.parse(localStorage.getItem('courses')) || [];
+            courses.push({
+                title: document.getElementById('c-name').value,
+                desc: document.getElementById('c-info').value,
+                pdf: document.getElementById('c-link-pdf').value,
+                video: document.getElementById('c-link-vid').value,
+                instructor: localStorage.getItem('userName')
+            });
+            localStorage.setItem('courses', JSON.stringify(courses));
+            alert("Content Published!");
+        }
+
+        // Exam Builder
+        function saveExam() {
+            const exams = JSON.parse(localStorage.getItem('exams')) || [];
+            exams.push({
+                title: document.getElementById('e-name').value,
+                link: document.getElementById('e-url').value,
+                teacher: localStorage.getItem('userName')
+            });
+            localStorage.setItem('exams', JSON.stringify(exams));
+            alert("Exam is now active for students!");
+        }
+
+        // Grading Logic
+        function saveGrade() {
+            const grades = JSON.parse(localStorage.getItem('results')) || [];
+            grades.push({
+                student: document.getElementById('g-st-name').value,
+                score: document.getElementById('g-val').value,
+                comment: document.getElementById('g-note').value
+            });
+            localStorage.setItem('results', JSON.stringify(grades));
+            alert("Grade shared with student!");
+        }
+
+        // REAL-TIME DATA: Fetching students from Student Page
+        // ملاحظة: لازم صفحة الطالب يكون فيها كود بيحفظ في مفتاح اسمه 'enrolledStudents'
+        function fetchEnrolledStudents() {
+            const container = document.getElementById('student-list-box');
+            const students = JSON.parse(localStorage.getItem('enrolledStudents')) || [];
+
+            if(students.length === 0) {
+                container.innerHTML = `<div class="empty-state"><i class="fas fa-users-slash fa-2x"></i><p>No students have enrolled yet.</p></div>`;
+                return;
+            }
+
+            container.innerHTML = students.map(s => `
+                <div class="student-row">
+                    <div>
+                        <strong style="display:block;">${s.name}</strong>
+                        <small style="color:var(--text-muted)">${s.email || 'No email provided'}</small>
+                    </div>
+                    <span style="background:var(--accent); color:white; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:bold;">Active Student</span>
+                </div>
+            `).join('');
+        }
+
+        // Initial Load
+        window.onload = () => {
+            document.getElementById('t-display-name').innerText = localStorage.getItem('userName') || "Instructor";
+            if(localStorage.getItem('t-img')) document.getElementById('t-photo').src = localStorage.getItem('t-img');
+        }
+    </script>
+</body>
+</html>

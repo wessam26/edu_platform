@@ -1,0 +1,224 @@
+﻿:root {
+    --primary-green: #89cf93;
+    --soft-green: #d4f1d5;
+    --dark-green: #4a7a51;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --btn-hover: #78c2ad;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--soft-green);
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    overflow: hidden;
+}
+
+/* خلفية حيوية متغيرة */
+.background-blobs .blob {
+    position: absolute;
+    filter: blur(80px);
+    z-index: -1;
+    border-radius: 50%;
+}
+
+.b1 {
+    width: 400px;
+    height: 400px;
+    background: #b8efa7;
+    top: -10%;
+    left: -10%;
+}
+
+.b2 {
+    width: 300px;
+    height: 300px;
+    background: #fff;
+    bottom: -5%;
+    right: 5%;
+}
+
+/* الكارت الرئيسي بتأثير الزجاج */
+.main-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    width: 450px;
+    padding: 40px;
+    border-radius: 40px;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    position: relative;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.window-controls {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    display: flex;
+    gap: 8px;
+}
+
+    .window-controls span {
+        width: 10px;
+        height: 10px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+    }
+
+/* تصميم الوجه المبتسم (الأنيميشن) */
+.avatar-container {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.face {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    animation: floating 3s infinite ease-in-out;
+}
+
+.eye {
+    width: 7px;
+    height: 7px;
+    background: var(--primary-green);
+    border-radius: 50%;
+    position: absolute;
+    top: 35px;
+    left: 22px;
+}
+
+    .eye.r {
+        left: 51px;
+    }
+
+.mouth {
+    width: 25px;
+    height: 12px;
+    border-bottom: 3px solid var(--primary-green);
+    border-radius: 0 0 20px 20px;
+    position: absolute;
+    bottom: 18px;
+    left: 27px;
+}
+
+.shadow {
+    width: 40px;
+    height: 6px;
+    background: rgba(0,0,0,0.05);
+    border-radius: 50%;
+    margin-top: 10px;
+    animation: shadowScale 3s infinite ease-in-out;
+}
+
+/* النصوص */
+.main-title {
+    color: var(--dark-green);
+    font-size: 28px;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.sub-title {
+    color: #666;
+    font-size: 14px;
+    margin: 10px 0 40px;
+}
+
+/* الأزرار الاحترافية */
+.button-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn {
+    border: none;
+    background: white;
+    padding: 15px 25px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    transition: 0.3s all;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--soft-green);
+    color: var(--primary-green);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+.btn span {
+    font-weight: 600;
+    color: #444;
+    font-size: 16px;
+}
+
+.btn:hover {
+    transform: translateX(10px);
+    background: var(--primary-green);
+}
+
+    .btn:hover .btn-icon {
+        background: rgba(255,255,255,0.3);
+        color: white;
+    }
+
+    .btn:hover span {
+        color: white;
+    }
+
+/* الحركات */
+@keyframes floating {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes shadowScale {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scale(0.7);
+        opacity: 0.1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

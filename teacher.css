@@ -1,0 +1,133 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #d8f3dc 0%, #b7e4c7 100%);
+}
+
+.registration-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 30px;
+    width: 380px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+/* أيقونة المعلم المميزة (بنظارة) */
+.teacher-icon {
+    width: 70px;
+    height: 70px;
+    background: #74b480;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.glasses {
+    width: 35px;
+    height: 12px;
+    border: 2px solid white;
+    border-top: none;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+    .glasses::before, .glasses::after {
+        content: '';
+        width: 12px;
+        height: 12px;
+        border: 2px solid white;
+        border-radius: 50%;
+        position: absolute;
+        top: -5px;
+    }
+
+    .glasses::before {
+        left: -2px;
+    }
+
+    .glasses::after {
+        right: -2px;
+    }
+
+.smile {
+    width: 20px;
+    height: 10px;
+    border-bottom: 2px solid white;
+    border-radius: 0 0 10px 10px;
+    margin-top: 8px;
+}
+
+h2 {
+    color: #1b4332;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #52b788;
+    font-size: 0.85rem;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: 1.5px solid #f0f0f0;
+    background: #f9f9f9;
+    outline: none;
+    transition: all 0.3s;
+}
+
+    input:focus {
+        border-color: #74b480;
+        background: white;
+        box-shadow: 0 0 8px rgba(116, 180, 128, 0.1);
+    }
+
+.join-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    border-radius: 12px;
+    border: none;
+    background: #2d6a4f;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+    .join-btn:hover {
+        background: #1b4332;
+    }
+
+.login-link {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #707070;
+}
+
+    .login-link a {
+        color: #2d6a4f;
+        font-weight: 600;
+        text-decoration: none;
+    }

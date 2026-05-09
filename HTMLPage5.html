@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Registration</title>
+    <link rel="stylesheet" href="teacher.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="registration-card">
+        <div class="teacher-icon">
+            <div class="glasses"></div>
+            <div class="smile"></div>
+        </div>
+        <h2>Teacher Join</h2>
+        <p class="subtitle">Create your teacher account</p>
+        <form>
+            <div class="input-group">
+                <input type="text" id="t_name" placeholder="Full Name" required>
+            </div>
+            <div class="input-group">
+                <input type="email" id="t_email" placeholder="Email Address" required>
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Password" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="t_spec" placeholder="Specialization (e.g. Math, Arabic)" required>
+            </div>
+            <div class="input-group">
+                <input type="tel" placeholder="Phone Number" required>
+            </div>
+            <button type="button" class="join-btn" onclick="saveTeacher()">Create Account</button>
+            <div class="login-link">
+                <p>Already have an account? <a href="HTMLPage4.html">Sign in</a></p>
+            </div>
+        </form>
+    </div>
+    <script>
+        function saveTeacher() {
+            // حفظ الدور والاسم والتخصص
+            localStorage.setItem('userRole', 'teacher');
+            localStorage.setItem('userName', document.getElementById('t_name').value);
+            localStorage.setItem('userSpec', document.getElementById('t_spec').value);
+
+            // التوجه لصفحة النجاح
+            window.location.href = 'continue.html';
+        }
+    </script>
+</body>
+</html>

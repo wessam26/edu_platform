@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="stylesheet3.css">
+</head>
+<body>
+    <div class="registration-card">
+        <div class="face-icon"><div class="eyes"></div><div class="smile"></div></div>
+        <h2>Sign Up (Student)</h2>
+        <form>
+            <div class="input-group"><input type="text" id="s_name" placeholder="Full name" required></div>
+            <div class="input-group"><input type="email" placeholder="Email" required></div>
+            <div class="input-group"><input type="password" placeholder="Password" required></div>
+            <div class="input-group">
+                <select id="s_grade" required>
+                    <option value="" disabled selected>Grade</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            <button type="button" class="continue-btn" onclick="registerUser('student')">Continue</button>
+        </form>
+    </div>
+
+    <script>
+        function registerUser(role) {
+            const name = document.getElementById('s_name').value;
+            if(name) {
+                localStorage.setItem('userRole', role);
+                localStorage.setItem('userName', name);
+                window.location.href = 'HTMLPage2.html'; // صفحة النجاح
+            } else { alert("Please enter your name"); }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+:root {
+    --instructor-color: #1b4332;
+    --accent: #52b788;
+    --bg: #f0f4f8;
+}
+
+body {
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 260px;
+    background: var(--instructor-color);
+    color: white;
+    padding: 30px 15px;
+}
+
+.sidebar-logo {
+    color: var(--accent);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.nav-item {
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+    .nav-item:hover, .nav-item.active {
+        background: var(--accent);
+    }
+
+.main {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.section {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+    .section.active {
+        display: block;
+    }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.profile-card {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.img-wrapper {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 20px;
+}
+
+#t-photo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 4px solid var(--accent);
+    object-fit: cover;
+}
+
+.edit-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: var(--accent);
+    color: white;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.btn {
+    background: var(--instructor-color);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: 0.3s;
+}
+
+    .btn:hover {
+        background: var(--accent);
+    }
